@@ -1,20 +1,20 @@
 # react-sanity-image
 
-Simple React components for making use of images hosted on the [Sanity.io](https://sanity.io/) CDN. I'm using Next.js and didn't really like the extra markup and apparent complexity of [next/image](https://nextjs.org/docs/api-reference/next/image) so decided to create some simple components to provide some of that functionality at lower cognitive cost, and without being Next-specific. I'm not sure if this was a good decision. This package provides:
+Simple React components for making use of images hosted on the [Sanity.io](https://sanity.io/) CDN. I'm using Next.js and didn't really like the extra markup and apparent complexity of [next/image](https://nextjs.org/docs/api-reference/next/image) so decided to try to create some simple components to provide some of that functionality at lower cognitive cost, and without being Next-specific. I'm not sure if this was a good decision. This package provides:
 
 * An `Img` component that generates `srcset` values for a range of image widths specified in `IMAGE_WIDTHS`.
 * Also accepts an optional `aspectRatio` prop to ensure generated images are cropped to a specific ratio.
 * A `Picture` component that wraps the above, providing a `media` prop allowing different aspect ratios to be specified for different media conditions, to satisfy the art-direction use-case.
 * Images support optional `lqip` prop which displays the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a `background-image`.
-* Images support Webp format using Sanity's automatic content negotiation.
-* Images have `width` and `height` attributes set automatically based on the supplied `aspectRatio` or intrinsic size of the image.
+* Images support WebP format using Sanity's automatic content negotiation.
+* Images have `width` and `height` attributes set automatically based on the supplied `aspectRatio` or intrinsic size of the image, to prevent layout shifts.
 
 This package is currently distributed in ES Module and CommonJS formats. This is my first npm package and I don't really know what I'm doing but those two options seemed popular. Structure of this package and README is inspired by [`next-sanity-image`](https://github.com/bundlesandbatches/next-sanity-image/), with thanks.
 
 ## Installation
 
 ```
-npm install --save @biggleszx/react-simple-images
+npm install --save @biggleszx/react-sanity-image
 ```
 
 The components require you to pass in a [SanityClient](https://www.npmjs.com/package/@sanity/client) instance, so you'll also need to install that if you haven't already:
@@ -88,7 +88,7 @@ The `Picture` component is similar but supports an additional `media` prop for a
 
 Order of `media` items matters the same way ordering `source` elements inside `<picture>` matters (i.e. the browser will use the first match that it encounters).
 
-Sanity's CDN will automatically serve `webp` format images to browsers that support them, so there's no need to include any extra sources for these (you can't specify the `type` attribute at the moment anyway).
+Sanity's CDN will automatically serve WebP format images to browsers that support them, so there's no need to include any extra sources for these (you can't specify the `type` attribute at the moment anyway).
 
 Finally, any extra props passed to `Picture` **will be set on the rendered `<picture>` element**. If you want to specify extra props for the `<img>` element inside it, use `imgProps`:
 
@@ -105,6 +105,15 @@ Finally, any extra props passed to `Picture` **will be set on the rendered `<pic
 ```
 
 ## Development
+
+Clone the project, activate [`nvm`](https://github.com/nvm-sh/nvm#install--update-script), if that's your thing, and install:
+
+```shell
+$ git clone git@github.com:BigglesZX/react-sanity-image.git
+$ cd react-sanity-image
+$ nvm use  # `nvm install` if necessary
+$ npm install
+```
 
 Storybook is included to facilitate local development and testing. You'll need to configure a connection to a Sanity project from which an image asset can be retreived for use in stories.
 
