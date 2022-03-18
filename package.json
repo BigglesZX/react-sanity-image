@@ -1,0 +1,63 @@
+{
+    "name": "@biggleszx/react-sanity-image",
+    "version": "0.1.0",
+    "description": "Simple React components for presenting images from Sanity",
+    "author": "BigglesZX <biggleszx@biggleszx.com>",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.es.js",
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BigglesZX/react-sanity-image.git"
+    },
+    "homepage": "https://github.com/BigglesZX/react-sanity-image#readme",
+    "bugs": {
+        "url": "https://github.com/BigglesZX/react-sanity-image/issues"
+    },
+    "keywords": [
+        "sanity",
+        "react",
+        "image",
+        "picture"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "@sanity/image-url": "^1.0.1",
+        "prop-types": "^15.8.1"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.17.6",
+        "@babel/core": "^7.17.5",
+        "@babel/eslint-parser": "^7.17.0",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-react": "^7.16.7",
+        "@rollup/plugin-babel": "^5.3.1",
+        "@rollup/plugin-node-resolve": "^13.1.3",
+        "@sanity/client": "^3.2.0",
+        "@storybook/addon-essentials": "^6.4.19",
+        "@storybook/react": "^6.4.19",
+        "eslint": "^8.11.0",
+        "eslint-plugin-compat": "^4.0.2",
+        "eslint-plugin-react": "^7.29.4",
+        "eslint-plugin-react-hooks": "^4.3.0",
+        "eslint-plugin-storybook": "^0.5.7",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "rollup": "^2.70.1"
+    },
+    "peerDependencies": {
+        "@sanity/client": "^3.0.0",
+        "react": "^17.0.0"
+    },
+    "engines": {
+        "node": ">=16.14.0"
+    },
+    "scripts": {
+        "build": "rm dist/* ; rollup --config",
+        "lint": "eslint --ext .js src",
+        "prepublishOnly": "npm run build",
+        "storybook": "start-storybook -p 6006"
+    }
+}

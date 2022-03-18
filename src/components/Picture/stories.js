@@ -1,0 +1,41 @@
+import sanityClient from '@sanity/client';
+
+import Picture from './index';
+
+
+const client = sanityClient({
+    projectId: process.env.SANITY_PROJECT_ID,
+    dataset: process.env.SANITY_DATASET,
+    apiVersion: '2022-03-14',
+    useCdn: true,
+});
+
+const query = '*[_type == "sanity.imageAsset" && _id == $assetId][0]';
+const params = { assetId: process.env.SANITY_ASSET_ID };
+
+export default {
+    title: 'Picture',
+    component: Picture,
+};
+
+const Template = (args, { loaded: { image } }) => {
+    console.log(image);
+    return <Picture image={image} {...args} />
+};
+Template.loaders = [
+    async () => ({
+        image: await client.fetch(query, params),
+    }),
+];
+
+export const Default = Template.bind({});
+Default.args = {
+    client,
+};
+Default.loaders = [
+    async () => ({
+        image: {
+            asset: await client.fetch(query, params),
+        },
+    }),
+];

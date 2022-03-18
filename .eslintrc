@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest"
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
+        "plugin:compat/recommended",
+        "plugin:storybook/recommended"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
