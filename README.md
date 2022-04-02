@@ -170,5 +170,4 @@ TBC
 ## TODO
 
 * Add `quality` prop.
-* Add TypeScript.
 * Correct various other as-yet unrealised bad decisions.

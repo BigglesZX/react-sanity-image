@@ -3,25 +3,30 @@
         "browser": true,
         "node": true
     },
-    "parser": "@babel/eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "project": ["tsconfig.json"]
     },
+    "plugins": ["@typescript-eslint"],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
         "plugin:react-hooks/recommended",
         "plugin:compat/recommended",
-        "plugin:storybook/recommended"
+        "plugin:storybook/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "settings": {
         "react": {
             "version": "detect"
         }
-    }
+    },
+    "ignorePatterns": ["rollup.config.js"]
 }

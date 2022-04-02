@@ -1,4 +1,7 @@
 import sanityClient from '@sanity/client';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import type { SanityAsset, SanityImageObject } from '../../types';
 
 import Picture from './index';
 
@@ -16,15 +19,15 @@ const params = { assetId: process.env.SANITY_ASSET_ID };
 export default {
     title: 'Picture',
     component: Picture,
-};
+} as ComponentMeta<typeof Picture>;
 
-const Template = (args, { loaded: { image } }) => {
-    return <Picture client={client} image={image} {...args} />
+const Template: ComponentStory<typeof Picture> = (args, { loaded: { image } }) => {
+    return <Picture {...args} client={client} image={(image as SanityImageObject)} />
 };
 Template.loaders = [
     async () => ({
         image: {
-            asset: await client.fetch(query, params),
+            asset: (await client.fetch(query, params)) as Promise<SanityAsset>,
         },
     }),
 ];

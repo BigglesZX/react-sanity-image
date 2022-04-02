@@ -1,11 +1,11 @@
-import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 
 import pkg from './package.json';
 
 
 const config = {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: [
         {
             file: pkg.main,
@@ -17,16 +17,14 @@ const config = {
         },
     ],
     plugins: [
-        babel({
-            exclude: 'node_modules/**',
-            babelHelpers: 'bundled',
-        }),
+        typescript(),
         nodeResolve(),
     ],
     external: [
         'prop-types',
         '@sanity/client',
         '@sanity/image-url',
+        'react/jsx-runtime',
     ],
 };
 
