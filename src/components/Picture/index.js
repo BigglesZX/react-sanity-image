@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 import { Img } from '../Img';
-import { getSrc, getSrcSet, getLqipBackgroundStyle } from '../../common';
+import { getSrcSet } from '../../common';
 
 
-export const Picture = ({ client, image, aspectRatio, lqip, media, sizes, imgProps, ...rest }) => (
+export const Picture = ({ client, image, aspectRatio, lqip, media = [], sizes, imgProps, ...rest }) => (
     <picture {...rest}>
         {media.map(({ media, aspectRatio }) => (
             <source
@@ -14,10 +14,11 @@ export const Picture = ({ client, image, aspectRatio, lqip, media, sizes, imgPro
             />
         ))}
         <Img
-            srcSet={getSrcSet(client, image, aspectRatio)}
+            client={client}
+            image={image}
+            aspectRatio={aspectRatio}
+            lqip={lqip}
             sizes={sizes}
-            src={getSrc(client, image, aspectRatio)}
-            style={lqip ? getLqipBackgroundStyle(image) : null}
             {...imgProps}
         />
     </picture>

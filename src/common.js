@@ -24,7 +24,7 @@ export const getSrcSet = (client, image, aspectRatio) => {
 
 export const getSrc = (client, image, aspectRatio) => {
     const { width, height } = getDefaultSize(image, aspectRatio);
-    return getUrl(image, width, height);
+    return getUrl(client, image, width, height);
 };
 
 export const getDefaultSize = (image, aspectRatio) => {

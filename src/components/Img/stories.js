@@ -19,23 +19,16 @@ export default {
 };
 
 const Template = (args, { loaded: { image } }) => {
-    console.log(image);
-    return <Img image={image} {...args} />
+    return <Img client={client} image={image} {...args} />
 };
 Template.loaders = [
-    async () => ({
-        image: await client.fetch(query, params),
-    }),
-];
-
-export const Default = Template.bind({});
-Default.args = {
-    client,
-};
-Default.loaders = [
     async () => ({
         image: {
             asset: await client.fetch(query, params),
         },
     }),
 ];
+
+export const Default = Template.bind({});
+Default.args = {};
+Default.loaders = Template.loaders;
