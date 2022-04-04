@@ -21,7 +21,7 @@ export default {
 } as ComponentMeta<typeof Img>;
 
 const Template: ComponentStory<typeof Img> = (args, { loaded: { image }}) => {
-    return <Img {...args} client={client} image={(image as SanityImageObject)} />
+    return <Img {...args} client={client} image={image as SanityImageObject} />
 };
 Template.loaders = [
     async () => ({
