@@ -148,7 +148,7 @@ npm run storybook
 | `client`      | [`SanityClient`](https://www.npmjs.com/package/@sanity/client) | Client instance to use when building image URLs |
 | `image`       | [`SanityImageSource`](https://www.npmjs.com/package/@sanity/image-url#imagesource) | A reference to a Sanity image asset. You can pass in any asset that is also supported by the [image() method of @sanity/image-url](https://www.npmjs.com/package/@sanity/image-url#imagesource). |
 | `aspectRatio` | <code>number &#124; null<code> | Aspect ratio (`height ÷ width`) to which the source image should be cropped, e.g. `9/16` or `0.5625` for a 16:9 image. If omitted or set to `null`, the intrinsic aspect ratio of the source will be used. |
-| `lqip`        | `boolean`| Set to `true` to use the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a placeholder (via CSS `background-image`). Requires that `lqip` be enabled in the image field's `metadata` setting – I think this needs to be present at time of of upload. |
+| `lqip`        | `boolean`| Set to `true` to use the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a placeholder (via CSS `background-image`). Requires that `lqip` be enabled in the image field's `metadata` setting – I think this needs to be present at time of of upload, but maybe not in recent versions. |
 | `sizes`       | `string` | String to use for the rendered `<img>` element's [`sizes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) attribute. See example in **Usage** above. |
 
 ### `Picture`
@@ -165,9 +165,17 @@ npm run storybook
 
 ## Creating a new version for npm
 
-TBC
+This is mostly for my benefit.
+
+1. Bump version number in `package.json`
+1. Update `CHANGELOG`
+1. `$ git commit ...`
+1. `$ git tag -a x.x.x` (check `git tags` for current)
+1. `$ git push origin main`
+1. `$ git push --tags`
+1. `$ npm publish --access public`
 
 ## TODO
 
-* Add `quality` prop.
+* Add support for [`quality`](https://www.sanity.io/docs/image-urls#q-83311ae15535) prop.
 * Correct various other as-yet unrealised bad decisions.

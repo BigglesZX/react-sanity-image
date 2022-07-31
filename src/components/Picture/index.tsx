@@ -1,15 +1,18 @@
 import { Img } from '../Img';
 
 import { getSrcSet } from '../../utils';
-import type { ImgProps } from '../Img';
+import type { BaseImgProps } from '../Img';
 
-export interface PictureProps extends ImgProps {
+export interface BasePictureProps {
     media?: {
         media: string,
         aspectRatio?: number,
     }[],
-    imgProps?: JSX.IntrinsicElements['img'][],
+    imgProps?: React.HTMLAttributes<HTMLImageElement>,
 }
+
+export type PictureProps =
+    BaseImgProps & BasePictureProps & React.HTMLAttributes<HTMLPictureElement>;
 
 export const Picture = ({ client, image, aspectRatio, lqip, media = [], sizes, imgProps, ...rest }: PictureProps) => (
     <picture {...rest}>

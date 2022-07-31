@@ -2,13 +2,15 @@ import { getSrc, getSrcSet, getLqipBackgroundStyle } from '../../utils';
 
 import type { SanityClientLike, SanityImageObject } from '../../types';
 
-export interface ImgProps {
+export interface BaseImgProps {
     client: SanityClientLike,
     image: SanityImageObject,
     aspectRatio?: number,
-    lqip: boolean,
+    lqip?: boolean,
     sizes?: string,
 }
+
+export type ImgProps = BaseImgProps & React.HTMLAttributes<HTMLImageElement>;
 
 export const Img = ({ client, image, aspectRatio, lqip, sizes, ...rest }: ImgProps) => (
     <img
