@@ -8,7 +8,7 @@ export interface BasePictureProps {
         media: string,
         aspectRatio?: number,
     }[],
-    imgProps?: React.HTMLAttributes<HTMLImageElement>,
+    imgProps?: React.ImgHTMLAttributes<HTMLImageElement>,
 }
 
 export type PictureProps =

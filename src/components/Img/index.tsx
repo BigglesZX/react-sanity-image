@@ -10,7 +10,7 @@ export interface BaseImgProps {
     sizes?: string,
 }
 
-export type ImgProps = BaseImgProps & React.HTMLAttributes<HTMLImageElement>;
+export type ImgProps = BaseImgProps & React.ImgHTMLAttributes<HTMLImageElement>;
 
 export const Img = ({ client, image, aspectRatio, lqip, sizes, ...rest }: ImgProps) => (
     <img
