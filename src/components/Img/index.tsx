@@ -1,6 +1,14 @@
-import { getSrc, getSrcSet, getLqipBackgroundStyle } from '../../utils';
+import {
+    getDefaultSize,
+    getSrc,
+    getSrcSet,
+    getLqipBackgroundStyle,
+} from '../../utils';
 
-import type { SanityClientLike, SanityImageObject } from '../../types';
+import type {
+    SanityClientLike,
+    SanityImageObject,
+} from '../../types';
 
 export interface BaseImgProps {
     client: SanityClientLike,
@@ -18,6 +26,7 @@ export const Img = ({ client, image, aspectRatio, lqip, sizes, ...rest }: ImgPro
         sizes={sizes}
         src={getSrc(client, image, aspectRatio)}
         style={lqip ? getLqipBackgroundStyle(image) : {}}
+        {...getDefaultSize(image, aspectRatio)}
         {...rest}
     />
 );
