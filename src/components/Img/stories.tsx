@@ -34,3 +34,20 @@ Template.loaders = [
 export const Default = Template.bind({});
 Default.args = {};
 Default.loaders = Template.loaders;
+
+export const WithCropping = Template.bind({});
+WithCropping.args = {};
+WithCropping.loaders = [
+    async () => ({
+        image: {
+            asset: (await client.fetch(query, params)) as Promise<SanityAsset>,
+            crop: {
+                _type: "sanity.imageCrop",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: 0.5,
+            },
+        },
+    }),
+];

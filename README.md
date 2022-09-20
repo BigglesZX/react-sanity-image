@@ -2,7 +2,7 @@
 
 Simple React components for making use of images hosted on the [Sanity.io](https://sanity.io/) CDN. I'm using Next.js and didn't really like the extra markup and apparent complexity of [next/image](https://nextjs.org/docs/api-reference/next/image) so decided to try to create some simple components to provide some of that functionality at lower cognitive cost, and without being Next-specific. I'm not sure if this was a good decision. This package provides:
 
-* An `Img` component that generates `srcset` values for a range of image widths specified in `IMAGE_WIDTHS`.
+* An `Img` component that generates `srcset` values for a range of image widths specified in `SOURCE_WIDTHS`.
 * Also accepts an optional `aspectRatio` prop to ensure generated images are cropped to a specific ratio.
 * A `Picture` component that wraps the above, providing a `media` prop allowing different aspect ratios to be specified for different media conditions, to satisfy the art-direction use-case.
 * Images support optional `lqip` prop which displays the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a `background-image`.
@@ -170,7 +170,7 @@ This is mostly for my benefit.
 1. Bump version number in `package.json`
 1. Update `CHANGELOG`
 1. `$ git commit ...`
-1. `$ git tag -a x.x.x` (check `git tags` for current)
+1. `$ git tag -a x.x.x` (check `git tag` for current)
 1. `$ git push origin main`
 1. `$ git push --tags`
 1. `$ npm publish --access public`

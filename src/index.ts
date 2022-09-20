@@ -7,4 +7,7 @@ export type {
 
 export { default as Img } from "./components/Img";
 export { default as Picture } from "./components/Picture";
-export { IMAGE_WIDTHS } from "./utils";
+export { SOURCE_WIDTHS } from "./utils";
+
+// Legacy constant name for backwards-compatibility
+export { SOURCE_WIDTHS as IMAGE_WIDTHS } from "./utils";

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.3 (September 20th, 2022)
+
+-   Fixed: Image dimension and aspect ratio calculations now correctly take into account any `crop` defined on the Sanity image object.
+-   Changed: Renamed `IMAGE_WIDTHS` constant to `SOURCE_WIDTHS` so as to be slightly more descriptive. `IMAGE_WIDTHS` is still exported as an alternative name to preserve backwards-compatibility, but this will be removed in the next major version.
+-   New: Added `Img` story to demonstrate image cropping.
+-   New: Added JSDoc documentation to utility functions.
+
 ## 0.1.2 (August 3rd, 2022)
 
 -   New: Added `width` and `height` attributes to `img` elements rendered by `Img`.
