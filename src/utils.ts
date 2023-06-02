@@ -107,7 +107,7 @@ export const getSrcSet = (client: SanityClientLike, image: SanityImageObject, as
 export const getSrc = (client: SanityClientLike, image: SanityImageObject, aspectRatio?: number, options?: ImageUrlBuilderOptionsWithAliases) => {
     const imageOptions = { ...DEFAULT_BUILDER_OPTIONS, ...options };
     const { width, height } = getDefaultSize(image, aspectRatio, imageOptions.sourceWidths);
-    return getUrl(client, image, { width, height, ...options });
+    return getUrl(client, image, { width, height, ...imageOptions });
 };
 
 /**
