@@ -18,6 +18,20 @@ const params = { assetId: process.env.SANITY_ASSET_ID };
 export default {
     title: 'Img',
     component: Img,
+    args: {
+        builderOptions: {
+            blur: undefined,
+            sharpen: undefined,
+            format: undefined,
+            invert: undefined,
+            orientation: undefined,
+            quality: undefined,
+            fit: undefined,
+            crop: undefined,
+            saturation: undefined,
+            auto: undefined,
+        }
+    }
 } as ComponentMeta<typeof Img>;
 
 const Template: ComponentStory<typeof Img> = (args, { loaded: { image }}) => {
