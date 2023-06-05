@@ -18,20 +18,6 @@ const params = { assetId: process.env.SANITY_ASSET_ID };
 export default {
     title: 'Img',
     component: Img,
-    args: {
-        builderOptions: {
-            blur: undefined,
-            sharpen: undefined,
-            format: undefined,
-            invert: undefined,
-            orientation: undefined,
-            quality: undefined,
-            fit: undefined,
-            crop: undefined,
-            saturation: undefined,
-            auto: undefined,
-        }
-    }
 } as ComponentMeta<typeof Img>;
 
 const Template: ComponentStory<typeof Img> = (args, { loaded: { image }}) => {
@@ -52,6 +38,36 @@ Default.loaders = Template.loaders;
 export const WithCropping = Template.bind({});
 WithCropping.args = {};
 WithCropping.loaders = [
+    async () => ({
+        image: {
+            asset: (await client.fetch(query, params)) as Promise<SanityAsset>,
+            crop: {
+                _type: "sanity.imageCrop",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: 0.5,
+            },
+        },
+    }),
+];
+
+export const WithBuilderOptions = Template.bind({});
+WithBuilderOptions.args = {
+    builderOptions: {
+        blur: undefined,
+        sharpen: undefined,
+        format: undefined,
+        invert: undefined,
+        orientation: 90,
+        quality: undefined,
+        fit: undefined,
+        crop: undefined,
+        saturation: undefined,
+        auto: undefined,
+    },
+};
+WithBuilderOptions.loaders = [
     async () => ({
         image: {
             asset: (await client.fetch(query, params)) as Promise<SanityAsset>,
