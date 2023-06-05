@@ -10,11 +10,11 @@ export const DEFAULT_SOURCE_WIDTHS = [320, 640, 960, 1280, 1600, 1920, 2240];
 /**
  * The fallback quality that will be used when none is provided.
  */
-export const DEFAULT_FALLBACK_IMAGE_QUALITY = 90;
+export const DEFAULT_IMAGE_QUALITY = 90;
 
 export const DEFAULT_BUILDER_OPTIONS: BuilderOptions = {
   auto: 'format',
-  quality: DEFAULT_FALLBACK_IMAGE_QUALITY,
+  quality: DEFAULT_IMAGE_QUALITY,
   sourceWidths: DEFAULT_SOURCE_WIDTHS,
 };
 
