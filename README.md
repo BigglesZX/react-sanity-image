@@ -46,11 +46,20 @@ const client = sanityClient({
 
 Assuming you've already queried a document from Sanity that includes an image field (there's an example [here](https://www.sanity.io/docs/presenting-images#BnS1mFRw); let's say it's `person` and the field is `person.image`), render the `Img` component like this:
 
-```js
+```jsx
 // Basic usage at intrinsic aspect ratio
 <Img
     client={client}
     image={person.image}
+/>
+
+// Specifying aspect ratio and `sizes` attribute, and enabling `lqip`
+<Img
+    client={client}
+    image={person.image}
+    builderOptions={{
+        blur: 50
+    }}
 />
 
 // Specifying aspect ratio and `sizes` attribute, and enabling `lqip`
@@ -73,7 +82,7 @@ Assuming you've already queried a document from Sanity that includes an image fi
 
 The `Picture` component is similar but supports an additional `media` prop for adding extra sources:
 
-```js
+```jsx
 <Picture
     client={client}
     image={person.image}
@@ -86,13 +95,25 @@ The `Picture` component is similar but supports an additional `media` prop for a
 />
 ```
 
+It also supports `builderOptions` which will be applied to all URLs that are created:
+
+```jsx
+<Picture
+    client={client}
+    image={person.image}
+    builderOptions={{
+        blur: 50
+    }}
+/>
+```
+
 Order of `media` items matters the same way ordering `source` elements inside `<picture>` matters (i.e. the browser will use the first match that it encounters).
 
 Sanity's CDN will automatically serve WebP format images to browsers that support them, so there's no need to include any extra sources for these (you can't specify the `type` attribute at the moment anyway).
 
 Finally, any extra props passed to `Picture` **will be set on the rendered `<picture>` element**. If you want to specify extra props for the `<img>` element inside it, use `imgProps`:
 
-```js
+```jsx
 <Picture
     client={client}
     image={person.image}
@@ -115,7 +136,7 @@ $ nvm use  # `nvm install` if necessary
 $ npm install
 ```
 
-Storybook is included to facilitate local development and testing. You'll need to configure a connection to a Sanity project from which an image asset can be retreived for use in stories.
+Storybook is included to facilitate local development and testing. You'll need to configure a connection to a Sanity project from which an image asset can be retrieved for use in stories.
 
 Copy the included `.env.example` file to `.env` and edit it to add your project details and the ID of an asset to fetch. You can find one by querying `imageAsset` documents within your project (`*[_type == "sanity.imageAsset"]`).
 
