@@ -53,7 +53,7 @@ Assuming you've already queried a document from Sanity that includes an image fi
     image={person.image}
 />
 
-// Specifying aspect ratio and `sizes` attribute, and enabling `lqip`
+// Passing options to the URL builder
 <Img
     client={client}
     image={person.image}
