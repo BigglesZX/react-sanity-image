@@ -51,3 +51,33 @@ WithCropping.loaders = [
         },
     }),
 ];
+
+export const WithBuilderOptions = Template.bind({});
+WithBuilderOptions.args = {
+    builderOptions: {
+        blur: undefined,
+        sharpen: undefined,
+        format: undefined,
+        invert: undefined,
+        orientation: 90,
+        quality: undefined,
+        fit: undefined,
+        crop: undefined,
+        saturation: undefined,
+        auto: undefined,
+    },
+};
+WithBuilderOptions.loaders = [
+    async () => ({
+        image: {
+            asset: (await client.fetch(query, params)) as Promise<SanityAsset>,
+            crop: {
+                _type: "sanity.imageCrop",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: 0.5,
+            },
+        },
+    }),
+];

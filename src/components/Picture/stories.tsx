@@ -35,3 +35,24 @@ Template.loaders = [
 export const Default = Template.bind({});
 Default.args = {};
 Default.loaders = Template.loaders;
+
+export const WithOptionsAndMedia = Template.bind({});
+WithOptionsAndMedia.args = {
+    builderOptions: {
+        blur: undefined,
+        sharpen: undefined,
+        format: undefined,
+        invert: true,
+        orientation: undefined,
+        quality: undefined,
+        fit: undefined,
+        crop: undefined,
+        saturation: undefined,
+        auto: undefined,
+    },
+    media:[{
+        media: '(min-width: 1024px)',
+        aspectRatio: 9/16,
+    }]
+};
+WithOptionsAndMedia.loaders = Template.loaders;

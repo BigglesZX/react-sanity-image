@@ -1,21 +1,32 @@
 import imageUrlBuilder from '@sanity/image-url';
 
-import { SanityClientLike, SanityImageObject } from './types';
+import { SanityClientLike, SanityImageObject, ImageUrlBuilderOptionsWithAliases, BuilderOptions } from './types';
 
 /**
  * Various widths at which to generate image sources in `srcset`. First item is used as the default width in fallback `img` elements.
  */
-export const SOURCE_WIDTHS = [320, 640, 960, 1280, 1600, 1920, 2240];
+export const DEFAULT_SOURCE_WIDTHS = [320, 640, 960, 1280, 1600, 1920, 2240];
 
 /**
- * Get dimensions of the specified image at the default size, which is a `width` of the first element in `SOURCE_WIDTHS` and a corresponding `height` based on cropped or default aspect ratio, overrideable with the `aspectRatio` argument
+ * The fallback quality that will be used when none is provided.
+ */
+export const DEFAULT_IMAGE_QUALITY = 90;
+
+export const DEFAULT_BUILDER_OPTIONS: BuilderOptions = {
+  auto: 'format',
+  quality: DEFAULT_IMAGE_QUALITY,
+  sourceWidths: DEFAULT_SOURCE_WIDTHS,
+};
+
+/**
+ * Get dimensions of the specified image at the default size, which is a `width` of the first element in `DEFAULT_SOURCE_WIDTHS` and a corresponding `height` based on cropped or default aspect ratio, overrideable with the `aspectRatio` argument
  * @param image Sanity image object
  * @param aspectRatio Desired aspect ratio
  * @returns Dimensions object containing `width` and `height`
  */
-export const getDefaultSize = (image: SanityImageObject, aspectRatio?: number) => {
+export const getDefaultSize = (image: SanityImageObject, aspectRatio?: number, sourceWidths = DEFAULT_SOURCE_WIDTHS) => {
     const finalAspectRatio = aspectRatio || getEffectiveAspectRatio(image);
-    const width = SOURCE_WIDTHS[0];
+    const width = sourceWidths[0];
     const height = Math.round(finalAspectRatio * width);
     return { width, height };
 };
@@ -78,37 +89,37 @@ export const getLqipBackgroundStyle = (image: SanityImageObject) => image.asset.
  * @param client Sanity client instance
  * @param image Sanity image object
  * @param aspectRatio Desired aspect ratio of generated sources
+ * @param options The image builder options to use
  * @returns `srcset` string
  */
-export const getSrcSet = (client: SanityClientLike, image: SanityImageObject, aspectRatio?: number) => {
+export const getSrcSet = (client: SanityClientLike, image: SanityImageObject, aspectRatio?: number, options?: ImageUrlBuilderOptionsWithAliases) => {
     const { width: effectiveWidth } = getEffectiveDimensions(image);
     const finalAspectRatio = aspectRatio || getEffectiveAspectRatio(image);
-    return SOURCE_WIDTHS.map(width => {
+    const imageOptions = { ...DEFAULT_BUILDER_OPTIONS, ...options };
+    return (imageOptions.sourceWidths || DEFAULT_SOURCE_WIDTHS).map(width => {
         const height = Math.round(finalAspectRatio * width);
         return width <= effectiveWidth
-            ? `${getUrl(client, image, width, height)} ${width}w`
+            ? `${getUrl(client, image, { width, height, ...imageOptions })} ${width}w`
             : undefined;
     }).filter(s => s).join(', ');
 };
 
-export const getSrc = (client: SanityClientLike, image: SanityImageObject, aspectRatio?: number) => {
-    const { width, height } = getDefaultSize(image, aspectRatio);
-    return getUrl(client, image, width, height);
+export const getSrc = (client: SanityClientLike, image: SanityImageObject, aspectRatio?: number, options?: ImageUrlBuilderOptionsWithAliases) => {
+    const imageOptions = { ...DEFAULT_BUILDER_OPTIONS, ...options };
+    const { width, height } = getDefaultSize(image, aspectRatio, imageOptions.sourceWidths);
+    return getUrl(client, image, { width, height, ...imageOptions });
 };
 
 /**
  * Use the Sanity image-url builder to construct a CDN URL for the given image at the given dimensions
  * @param client Sanity client instance
  * @param image Sanity image object
- * @param width Image width in pixels
- * @param height Image height in pixels
+ * @param options ImageUrlBuilderOptionsWithAliases builder options
  * @returns CDN URL for generated image
  */
- export const getUrl = (client: SanityClientLike, image: SanityImageObject, width: number, height: number) => {
+ export const getUrl = (client: SanityClientLike, image: SanityImageObject, options: ImageUrlBuilderOptionsWithAliases) => {
     const builder = imageUrlBuilder(client);
-    return builder.image(image)
-                  .width(width)
-                  .height(height)
-                  .auto('format')
+    return builder.withOptions(options)
+                  .image(image)
                   .url();
 };

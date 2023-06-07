@@ -14,21 +14,17 @@ export interface BasePictureProps {
 export type PictureProps =
     BaseImgProps & BasePictureProps & React.HTMLAttributes<HTMLPictureElement>;
 
-export const Picture = ({ client, image, aspectRatio, lqip, media = [], sizes, imgProps, ...rest }: PictureProps) => (
+export const Picture = ({ client, image, aspectRatio, lqip, media = [], sizes, builderOptions = undefined, imgProps, ...rest }: PictureProps) => (
     <picture {...rest}>
         {media.map(({ media, aspectRatio }) => (
             <source
                 key={media}
                 media={media}
-                srcSet={getSrcSet(client, image, aspectRatio)}
+                srcSet={getSrcSet(client, image, aspectRatio, builderOptions)}
             />
         ))}
         <Img
-            client={client}
-            image={image}
-            aspectRatio={aspectRatio}
-            lqip={lqip}
-            sizes={sizes}
+            {...{ client, image, aspectRatio, lqip, sizes, builderOptions }}
             {...imgProps}
         />
     </picture>
