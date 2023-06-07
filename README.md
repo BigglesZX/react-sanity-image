@@ -2,7 +2,7 @@
 
 Simple React components for making use of images hosted on the [Sanity.io](https://sanity.io/) CDN. I'm using Next.js and didn't really like the extra markup and apparent complexity of [next/image](https://nextjs.org/docs/api-reference/next/image) so decided to try to create some simple components to provide some of that functionality at lower cognitive cost, and without being Next-specific. I'm not sure if this was a good decision. This package provides:
 
-* An `Img` component that generates `srcset` values for a range of image widths specified in `SOURCE_WIDTHS`.
+* An `Img` component that generates `srcset` values for a specified range of image widths (or a sensible defaults in `DEFAULT_SOURCE_WIDTHS`).
 * Also accepts an optional `aspectRatio` prop to ensure generated images are cropped to a specific ratio.
 * A `Picture` component that wraps the above, providing a `media` prop allowing different aspect ratios to be specified for different media conditions, to satisfy the art-direction use-case.
 * Images support optional `lqip` prop which displays the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a `background-image`.
@@ -53,12 +53,13 @@ Assuming you've already queried a document from Sanity that includes an image fi
     image={person.image}
 />
 
-// Passing options to the URL builder
+// Passing options to the URL builder, including `sourceWidths` to override `DEFAULT_SOURCE_WIDTHS`
 <Img
     client={client}
     image={person.image}
     builderOptions={{
-        blur: 50
+        blur: 50,
+        sourceWidths: [100, 200, 300],
     }}
 />
 
@@ -95,7 +96,7 @@ The `Picture` component is similar but supports an additional `media` prop for a
 />
 ```
 
-It also supports `builderOptions` which will be applied to all URLs that are created:
+It also supports `builderOptions` like `Img` does, which will be applied to all URLs that are created:
 
 ```jsx
 <Picture
@@ -156,8 +157,8 @@ Lastly you'll need to allow CORS access to Sanity from the Storybook instance. H
 
 Start Storybook:
 
-```
-npm run storybook
+```shell
+$ npm run storybook
 ```
 
 ## API
@@ -200,5 +201,4 @@ This is mostly for my benefit.
 
 ## TODO
 
-* Add support for [`quality`](https://www.sanity.io/docs/image-urls#q-83311ae15535) prop.
-* Correct various other as-yet unrealised bad decisions.
+* Correct various as-yet unrealised bad decisions.
