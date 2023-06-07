@@ -36,8 +36,17 @@ export const Default = Template.bind({});
 Default.args = {};
 Default.loaders = Template.loaders;
 
-export const WithOptionsAndMedia = Template.bind({});
-WithOptionsAndMedia.args = {
+export const WithMedia = Template.bind({});
+WithMedia.args = {
+    media: [{
+        media: '(min-width: 1024px)',
+        aspectRatio: 1/1,
+    }],
+};
+WithMedia.loaders = Template.loaders;
+
+export const WithBuilderOptions = Template.bind({});
+WithBuilderOptions.args = {
     builderOptions: {
         blur: undefined,
         sharpen: undefined,
@@ -50,9 +59,5 @@ WithOptionsAndMedia.args = {
         saturation: undefined,
         auto: undefined,
     },
-    media:[{
-        media: '(min-width: 1024px)',
-        aspectRatio: 9/16,
-    }]
 };
-WithOptionsAndMedia.loaders = Template.loaders;
+WithBuilderOptions.loaders = Template.loaders;

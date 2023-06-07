@@ -58,8 +58,8 @@ WithBuilderOptions.args = {
         blur: undefined,
         sharpen: undefined,
         format: undefined,
-        invert: undefined,
-        orientation: 90,
+        invert: true,
+        orientation: undefined,
         quality: undefined,
         fit: undefined,
         crop: undefined,
@@ -67,17 +67,4 @@ WithBuilderOptions.args = {
         auto: undefined,
     },
 };
-WithBuilderOptions.loaders = [
-    async () => ({
-        image: {
-            asset: (await client.fetch(query, params)) as Promise<SanityAsset>,
-            crop: {
-                _type: "sanity.imageCrop",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: 0.5,
-            },
-        },
-    }),
-];
+WithBuilderOptions.loaders = Template.loaders;
