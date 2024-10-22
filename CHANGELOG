@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 (October 22nd, 2024)
+
+-   Changed: Added missing `sizes` prop when specifying `media` props for `Picture`. This was omitted due to a misunderstanding of how the `sizes` prop on `<source>` elements falls back (it doesn't inherit from the sibling `<img>` element, it defaults to `100vw`).
+
 ## 0.2.0 (June 7th, 2023)
 
 -   New: Components now support `builderOptions` prop with customisable source widths (thanks to [@james2doyle](https://github.com/james2doyle)).

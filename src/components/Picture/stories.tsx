@@ -45,6 +45,17 @@ WithMedia.args = {
 };
 WithMedia.loaders = Template.loaders;
 
+export const WithMediaAndSizes = Template.bind({});
+WithMediaAndSizes.args = {
+    media: [{
+        media: '(min-width: 1024px)',
+        aspectRatio: 1/1,
+        sizes: '50vw',
+    }],
+    sizes: '100vw',
+};
+WithMediaAndSizes.loaders = Template.loaders;
+
 export const WithBuilderOptions = Template.bind({});
 WithBuilderOptions.args = {
     builderOptions: {
