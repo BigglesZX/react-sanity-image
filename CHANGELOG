@@ -1,31 +1,37 @@
 # Changelog
 
+## 1.0.0 (May 7th, 2025)
+
+- Changed: Dropped support for Node <18
+- Changed: Updated `@sanity/client` peerDependency and adjusted typing of `client` props to better match that used by the client image-url builder
+- Changed: Updated development tooling – Rollup 4, Storybook 8, ESLint 9, Prettier
+
 ## 0.3.0 (October 22nd, 2024)
 
--   Changed: Added missing `sizes` prop when specifying `media` props for `Picture`. This was omitted due to a misunderstanding of how the `sizes` prop on `<source>` elements falls back (it doesn't inherit from the sibling `<img>` element, it defaults to `100vw`).
+- Changed: Added missing `sizes` prop when specifying `media` props for `Picture`. This was omitted due to a misunderstanding of how the `sizes` prop on `<source>` elements falls back (it doesn't inherit from the sibling `<img>` element, it defaults to `100vw`).
 
 ## 0.2.0 (June 7th, 2023)
 
--   New: Components now support `builderOptions` prop with customisable source widths (thanks to [@james2doyle](https://github.com/james2doyle)).
--   Changed: Renamed `SOURCE_WIDTHS` constant to `DEFAULT_SOURCE_WIDTHS`.
--   Changed: Components now use a default image quality parameter of `90`.
--   Fixed: Improved image layout in Storybook.
+- New: Components now support `builderOptions` prop with customisable source widths (thanks to [@james2doyle](https://github.com/james2doyle)).
+- Changed: Renamed `SOURCE_WIDTHS` constant to `DEFAULT_SOURCE_WIDTHS`.
+- Changed: Components now use a default image quality parameter of `90`.
+- Fixed: Improved image layout in Storybook.
 
 ## 0.1.3 (September 20th, 2022)
 
--   Fixed: Image dimension and aspect ratio calculations now correctly take into account any `crop` defined on the Sanity image object.
--   Changed: Renamed `IMAGE_WIDTHS` constant to `SOURCE_WIDTHS` so as to be slightly more descriptive. `IMAGE_WIDTHS` is still exported as an alternative name to preserve backwards-compatibility, but this will be removed in the next major version.
--   New: Added `Img` story to demonstrate image cropping.
--   New: Added JSDoc documentation to utility functions.
+- Fixed: Image dimension and aspect ratio calculations now correctly take into account any `crop` defined on the Sanity image object.
+- Changed: Renamed `IMAGE_WIDTHS` constant to `SOURCE_WIDTHS` so as to be slightly more descriptive. `IMAGE_WIDTHS` is still exported as an alternative name to preserve backwards-compatibility, but this will be removed in the next major version.
+- New: Added `Img` story to demonstrate image cropping.
+- New: Added JSDoc documentation to utility functions.
 
 ## 0.1.2 (August 3rd, 2022)
 
--   New: Added `width` and `height` attributes to `img` elements rendered by `Img`.
+- New: Added `width` and `height` attributes to `img` elements rendered by `Img`.
 
 ## 0.1.1 (July 31st, 2022)
 
--   Fixed: Corrected typings for `Img` props.
+- Fixed: Corrected typings for `Img` props.
 
 ## 0.1.0 (July 31st, 2022)
 
--   New: Initial version.
+- New: Initial version.

@@ -1,0 +1,7 @@
+{
+    "plugins": [],
+    "printWidth": 100,
+    "tabWidth": 4,
+    "quoteProps": "consistent",
+    "singleQuote": true
+}

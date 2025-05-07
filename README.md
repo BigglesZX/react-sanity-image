@@ -2,12 +2,12 @@
 
 Simple React components for making use of images hosted on the [Sanity.io](https://sanity.io/) CDN. I'm using Next.js and didn't really like the extra markup and apparent complexity of [next/image](https://nextjs.org/docs/api-reference/next/image) so decided to try to create some simple components to provide some of that functionality at lower cognitive cost, and without being Next-specific. I'm not sure if this was a good decision. This package provides:
 
-* An `Img` component that generates `srcset` values for a specified range of image widths (or a sensible defaults in `DEFAULT_SOURCE_WIDTHS`).
-* Also accepts an optional `aspectRatio` prop to ensure generated images are cropped to a specific ratio.
-* A `Picture` component that wraps the above, providing a `media` prop allowing different aspect ratios to be specified for different media conditions, to satisfy the art-direction use-case.
-* Images support optional `lqip` prop which displays the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a `background-image`.
-* Images support WebP format using Sanity's automatic content negotiation.
-* Images have `width` and `height` attributes set automatically based on the supplied `aspectRatio` or intrinsic size of the image, to prevent layout shifts.
+- An `Img` component that generates `srcset` values for a specified range of image widths (or a sensible defaults in `DEFAULT_SOURCE_WIDTHS`).
+- Also accepts an optional `aspectRatio` prop to ensure generated images are cropped to a specific ratio.
+- A `Picture` component that wraps the above, providing a `media` prop allowing different aspect ratios to be specified for different media conditions, to satisfy the art-direction use-case.
+- Images support optional `lqip` prop which displays the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a `background-image`.
+- Images support WebP format using Sanity's automatic content negotiation.
+- Images have `width` and `height` attributes set automatically based on the supplied `aspectRatio` or intrinsic size of the image, to prevent layout shifts.
 
 This package is currently distributed in ES Module and CommonJS formats. This is my first npm package and I don't really know what I'm doing but those two options seemed popular. Structure of this package and README is inspired by [`next-sanity-image`](https://github.com/bundlesandbatches/next-sanity-image/), with thanks.
 
@@ -36,7 +36,9 @@ import { Img, Picture } from '@biggleszx/react-sanity-image';
 Instantiate the Sanity client (see the SanityClient [docs](https://www.npmjs.com/package/@sanity/client) for more information about the properties used):
 
 ```js
-const client = sanityClient({
+import { createClient } from '@sanity/client';
+
+const client = createClient({
     projectId: 'xxxxxxxx',
     dataset: 'production',
     apiVersion: '2022-03-14',
@@ -87,11 +89,13 @@ The `Picture` component is similar but supports an additional `media` prop for a
 <Picture
     client={client}
     image={person.image}
-    aspectRatio={1/1}
-    media={[{
-        media: '(min-width: 1024px)',
-        aspectRatio: 9/16,
-    }]}
+    aspectRatio={1 / 1}
+    media={[
+        {
+            media: '(min-width: 1024px)',
+            aspectRatio: 9 / 16,
+        },
+    ]}
     sizes="(min-width: 1024px) 50vw, 100vw"
 />
 ```
@@ -103,7 +107,7 @@ It also supports `builderOptions` like `Img` does, which will be applied to all 
     client={client}
     image={person.image}
     builderOptions={{
-        blur: 50
+        blur: 50,
     }}
 />
 ```
@@ -165,27 +169,27 @@ $ npm run storybook
 
 ### `Img`
 
-| property         | type | description |
-| ---------------- | ---- | ----------- |
-| `client`         | [`SanityClient`](https://www.npmjs.com/package/@sanity/client) | Client instance to use when building image URLs |
-| `image`          | [`SanityImageSource`](https://www.npmjs.com/package/@sanity/image-url#imagesource) | A reference to a Sanity image asset. You can pass in any asset that is also supported by the [image() method of @sanity/image-url](https://www.npmjs.com/package/@sanity/image-url#imagesource). |
-| `aspectRatio`    | <code>number &#124; null<code> | Aspect ratio (`height ÷ width`) to which the source image should be cropped, e.g. `9/16` or `0.5625` for a 16:9 image. If omitted or set to `null`, the intrinsic aspect ratio of the source will be used. |
-| `lqip`           | `boolean`| Set to `true` to use the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a placeholder (via CSS `background-image`). Requires that `lqip` be enabled in the image field's `metadata` setting – I think this needs to be present at time of of upload, but maybe not in recent versions. |
-| `sizes`          | `string` | String to use for the rendered `<img>` element's [`sizes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) attribute. See example in **Usage** above. |
-| `builderOptions` | [`ImageUrlBuilderOptionsWithAliases`](https://github.com/sanity-io/image-url/blob/v1.0.2/src/types.ts#L31) | The options that will be passed to the URL builder |
+| property         | type                                                                                                       | description                                                                                                                                                                                                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`         | [`SanityClient`](https://www.npmjs.com/package/@sanity/client)                                             | Client instance to use when building image URLs                                                                                                                                                                                                                                                                                            |
+| `image`          | [`SanityImageSource`](https://www.npmjs.com/package/@sanity/image-url#imagesource)                         | A reference to a Sanity image asset. You can pass in any asset that is also supported by the [image() method of @sanity/image-url](https://www.npmjs.com/package/@sanity/image-url#imagesource).                                                                                                                                           |
+| `aspectRatio`    | <code>number &#124; null<code>                                                                             | Aspect ratio (`height ÷ width`) to which the source image should be cropped, e.g. `9/16` or `0.5625` for a 16:9 image. If omitted or set to `null`, the intrinsic aspect ratio of the source will be used.                                                                                                                                 |
+| `lqip`           | `boolean`                                                                                                  | Set to `true` to use the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a placeholder (via CSS `background-image`). Requires that `lqip` be enabled in the image field's `metadata` setting – I think this needs to be present at time of of upload, but maybe not in recent versions. |
+| `sizes`          | `string`                                                                                                   | String to use for the rendered `<img>` element's [`sizes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) attribute. See example in **Usage** above.                                                                                                                                                            |
+| `builderOptions` | [`ImageUrlBuilderOptionsWithAliases`](https://github.com/sanity-io/image-url/blob/v1.0.2/src/types.ts#L31) | The options that will be passed to the URL builder                                                                                                                                                                                                                                                                                         |
 
 ### `Picture`
 
-| property         | type | description |
-| ---------------- | ---- | ----------- |
-| `client`         | [`SanityClient`](https://www.npmjs.com/package/@sanity/client) | Client instance to use when building image URLs |
-| `image`          | [`SanityImageSource`](https://www.npmjs.com/package/@sanity/image-url#imagesource) | A reference to a Sanity image asset. You can pass in any asset that is also supported by the [image() method of @sanity/image-url](https://www.npmjs.com/package/@sanity/image-url#imagesource). |
-| `aspectRatio`    | <code>number &#124; null<code> | Aspect ratio (`height ÷ width`) to which the source image should be cropped **for the default source**, i.e. if no media conditions match. If omitted or set to `null`, the intrinsic aspect ratio of the source will be used. |
-| `lqip`           | `boolean`| Set to `true` to use the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a placeholder |
-| `media`          | `[{ media: string, aspectRatio: number, sizes: string }]` | Specify an array of media conditions and aspect ratios which will be used to render `<source>` elements in the resulting `<picture>`. Order of items matters (the browser will use the first match it encounters). See example in **Usage** above. |
-| `sizes`          | `string` | String to use for the rendered `<img>` element's [`sizes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) attribute. See example in **Usage** above. |
-| `imgProps`       | `object` | Any extra props to pass through to the rendered `<img>` element |
-| `builderOptions` | [`ImageUrlBuilderOptionsWithAliases`](https://github.com/sanity-io/image-url/blob/v1.0.2/src/types.ts#L31) | The options that will be passed to the URL builder |
+| property         | type                                                                                                       | description                                                                                                                                                                                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`         | [`SanityClient`](https://www.npmjs.com/package/@sanity/client)                                             | Client instance to use when building image URLs                                                                                                                                                                                                    |
+| `image`          | [`SanityImageSource`](https://www.npmjs.com/package/@sanity/image-url#imagesource)                         | A reference to a Sanity image asset. You can pass in any asset that is also supported by the [image() method of @sanity/image-url](https://www.npmjs.com/package/@sanity/image-url#imagesource).                                                   |
+| `aspectRatio`    | <code>number &#124; null<code>                                                                             | Aspect ratio (`height ÷ width`) to which the source image should be cropped **for the default source**, i.e. if no media conditions match. If omitted or set to `null`, the intrinsic aspect ratio of the source will be used.                     |
+| `lqip`           | `boolean`                                                                                                  | Set to `true` to use the image's [Low Quality Image Placeholder](https://www.sanity.io/docs/image-metadata#74bfd1db9b97) as a placeholder                                                                                                          |
+| `media`          | `[{ media: string, aspectRatio: number, sizes: string }]`                                                  | Specify an array of media conditions and aspect ratios which will be used to render `<source>` elements in the resulting `<picture>`. Order of items matters (the browser will use the first match it encounters). See example in **Usage** above. |
+| `sizes`          | `string`                                                                                                   | String to use for the rendered `<img>` element's [`sizes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) attribute. See example in **Usage** above.                                                                    |
+| `imgProps`       | `object`                                                                                                   | Any extra props to pass through to the rendered `<img>` element                                                                                                                                                                                    |
+| `builderOptions` | [`ImageUrlBuilderOptionsWithAliases`](https://github.com/sanity-io/image-url/blob/v1.0.2/src/types.ts#L31) | The options that will be passed to the URL builder                                                                                                                                                                                                 |
 
 ## Creating a new version for npm
 
@@ -201,4 +205,4 @@ This is mostly for my benefit.
 
 ## TODO
 
-* Correct various as-yet unrealised bad decisions.
+- Correct various as-yet unrealised bad decisions.

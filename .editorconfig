@@ -15,9 +15,3 @@ indent_size = 4
 
 [*.js,*.jsx,*.ts,*.tsx]
 quote_type = single
-
-[*.yml]
-indent_size = 2
-
-[*.toml]
-indent_size = 2
