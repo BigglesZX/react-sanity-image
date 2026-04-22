@@ -3,18 +3,18 @@
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "declaration": true,
-		"rootDir": "src",
-		"outDir": "dist",
+        "rootDir": "src",
+        "outDir": "dist",
         "esModuleInterop": true,
         "jsx": "react-jsx",
         "module": "esnext",
-        "moduleResolution": "node",
         "noImplicitAny": true,
         "resolveJsonModule": true,
         "strict": true,
         "target": "esnext",
         "noEmit": true,
-        "isolatedModules": true
+        "isolatedModules": true,
+        "types": ["node"]
     },
     "include": ["./src/**/*.ts", "./src/**/*.tsx"],
     "exclude": ["**/*.d.ts", "dist", "node_modules"]

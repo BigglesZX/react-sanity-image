@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (April 22nd, 2026)
+
+- Changed: Updated dependencies
+
 ## 1.0.0 (May 7th, 2025)
 
 - Changed: Dropped support for Node <18

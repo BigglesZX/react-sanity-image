@@ -16,5 +16,11 @@ const config: StorybookConfig = {
         name: '@storybook/react-webpack5',
         options: {},
     },
+    env: (config) => ({
+        ...config,
+        SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID || '',
+        SANITY_DATASET: process.env.SANITY_DATASET || '',
+        SANITY_ASSET_ID: process.env.SANITY_ASSET_ID || '',
+    }),
 };
 export default config;
